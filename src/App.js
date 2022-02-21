@@ -1,23 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import { Message } from './components';
+
+// const Button = () => {
+//   return (<button disabled>btn</button>);
+// }
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <message>Lorem ipsum sodales vivamus proin curabitur, mauris lectus integer sagittis odio, at eget mauris diam, donec maecenas orci auctor,</message>
+      <message content={'Lorem ipsum sodales vivamus proin'}>
+      </message>
     </div>
   );
 }
