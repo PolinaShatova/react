@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import styles from './message.module.css';
-import React from 'react';
 
 export const Message = (props) => {
     let className = classNames(styles.message, {
@@ -8,10 +7,10 @@ export const Message = (props) => {
         [styles.error]: props.theme === 'error',
     })
 
-    return (<message
+    return (<div
         className={className}
     >
         {props.children}  
         {props.content}
-    </message>)
+    </div>)
 }
