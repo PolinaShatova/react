@@ -55,7 +55,9 @@ function App() {
       return;
     }
 
-    sendMessage('bot', 'hello');
+    setTimeout(() => {
+      sendMessage('bot', 'hello');
+    },1000)
 
   }, [messageList]); //каждый раз когда меняется messageList, применяется функция внутри
 
