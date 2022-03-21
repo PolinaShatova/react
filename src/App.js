@@ -1,4 +1,6 @@
 
+import { ClassNames } from '@emotion/react';
+import { Container, InputBase, makeStyles, Paper} from '@mui/material';
 import { useEffect, useState } from 'react';
 import './App.css';
 
@@ -61,9 +63,36 @@ function App() {
 
   }, [messageList]); //каждый раз когда меняется messageList, применяется функция внутри
 
-  return (
-    <div className="App">
 
+    useEffect(() => {
+      inputRef.current.focus();
+    });
+  
+
+  const useStyles = makeStyles({
+    wrapper: {
+      display: 'grid',
+      gridTemplateColumns: '200px 1fr'
+    }
+  });
+
+  return (
+    <Container maxWidth="md">
+      <Paper
+        sx={{
+          padding: 2,
+          height: '80vh'
+        }}
+        elevation={3}
+        // className={classes.paper}
+        // component="form"
+        // onSubmit={onSubmitMessage}
+      >
+{/* 
+        <InputBase
+          inputRef={inputRef}
+        /> */}
+        
       <ul>
       {
         messageList.map(({ author, text}) => {
@@ -79,8 +108,8 @@ function App() {
         <button type='submit'>Отправить</button>
       </form>
 
-
-    </div>
+      </Paper>
+    </Container>
   );
 };
 
