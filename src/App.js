@@ -1,12 +1,22 @@
 
 import { ClassNames } from '@emotion/react';
-import { Container, InputBase, makeStyles, Paper} from '@mui/material';
+import { makeStyles } from '@mui/material';
 import { useEffect, useState } from 'react';
 import './App.css';
+import { MessageList } from "./components/MessageList";
+import { MessageInput } from "./components/MessageInput";
+import { ChatList } from "./components/ChatList";
+
+
+  const useStyles = makeStyles({
+    wrapper: {
+      display: 'grid',
+      gridTemplateColumns: '200px 1fr'
+    }
+  });
 
 function App() {
-
-  const [inputValue, setInputValue] = useState(''); //inputValue - хранит состояние
+  const classes = useStyles();
   
   const [messageList, setMessageList] = useState([]); //массив в котором хранятся задачи, базовое состояние - пустой массив
 
@@ -18,12 +28,12 @@ function App() {
     };
     newMessageList.push(newMessage);
     setMessageList(newMessageList);
-    resetInputValue();
+    // resetInputValue();
   }
 
-  const resetInputValue = () => {
-    setInputValue('');
-  }
+  // const resetInputValue = () => {
+  //   setInputValue('');
+  // }
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();//чтобы избежать перезагрузку страницы
@@ -38,14 +48,7 @@ function App() {
   //   setInputValue('');
   // };
 
-  const onSubmitMessage = (event) => {
-    event.preventDefault();
-    sendMessage('user', inputValue);
-  }
 
-  const onChangeInput = (event) => { //когда я что-то буду вводить в инпут будет приходить событие
-    setInputValue(event.target.value); //узнаю что вводит пользователь и сохраняю в стейт
-  };
 
   useEffect(() => {
     if (messageList.length === 0) {//если список сообщений не изменился
@@ -59,58 +62,70 @@ function App() {
 
     setTimeout(() => {
       sendMessage('bot', 'hello');
-    },1000)
+    }, 1000)
 
   }, [messageList]); //каждый раз когда меняется messageList, применяется функция внутри
 
 
-    useEffect(() => {
-      inputRef.current.focus();
-    });
-  
-
-  const useStyles = makeStyles({
-    wrapper: {
-      display: 'grid',
-      gridTemplateColumns: '200px 1fr'
-    }
-  });
-
   return (
-    <Container maxWidth="md">
-      <Paper
-        sx={{
-          padding: 2,
-          height: '80vh'
-        }}
-        elevation={3}
-        // className={classes.paper}
-        // component="form"
-        // onSubmit={onSubmitMessage}
-      >
-{/* 
-        <InputBase
-          inputRef={inputRef}
-        /> */}
+    <div className={classes.wrapper}>
+      <ChatList
+        list={[
+          {
+            name: "name",
+            id: "1"
+          },
+          {
+            name: "name",
+            id: "2"
+          },
+          {
+            name: "name",
+            id: "3"
+          }
+        ]}
+      />
+      <div>
+        <MessageList messageList={messageList} />
+        <MessageInput onSend={onSubmitMessage} />
+      </div>
+    </div>
+  )
+}
+//     <Container maxWidth="md">
+//       <Paper
+//         sx={{
+//           padding: 2,
+//           height: '80vh'
+//         }}
+//         elevation={3}
+//         // className={classes.paper}
+//         // component="form"
+//         // onSubmit={onSubmitMessage}
+//       >
+// {/* 
+//         <InputBase
+//           inputRef={inputRef}
+//         /> */}
         
-      <ul>
-      {
-        messageList.map(({ author, text}) => {
-          return <li>
-            <p> {author}: {text}</p>
-          </li>
-        })
-      }
-      </ul>
+//       <ul>
+//       {
+//         messageList.map(({ author, text}) => {
+//           return <li>
+//             <p> {author}: {text}</p>
+//           </li>
+//         })
+//       }
+//       </ul>
       
-      <form onSubmit={onSubmitMessage}>
-        <input value={inputValue} onChange={onChangeInput}></input>
-        <button type='submit'>Отправить</button>
-      </form>
+//       <form onSubmit={onSubmitMessage}>
+//         <input value={inputValue} onChange={onChangeInput}></input>
+//         <button type='submit'>Отправить</button>
+//       </form>
 
-      </Paper>
-    </Container>
-  );
-};
+//       </Paper>
+//     </Container>
+//   );
+// };
 
 export default App;

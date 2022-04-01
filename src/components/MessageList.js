@@ -24,6 +24,6 @@ MessageList.propTypes = {
     )
 };
 
-messageList.defaultProps = {
+MessageList.defaultProps = {
     messageList: []
 };
